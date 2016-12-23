@@ -18,7 +18,9 @@ from PIL import Image, ImageTk
 
 root = Tk()
 root.title("Eyes of Glouphrie Calculator")
-colours = ['red','green','orange','white','yellow','blue']
+colors = ['Red','Orange','Yellow','Green','Blue', 'Indigo', 'Violet']
+shapes = ['circle', 'triangle', 'square', 'pentagon']
+
 
 # r = 0
 # for c in colours:
@@ -29,11 +31,33 @@ colours = ['red','green','orange','white','yellow','blue']
 frame = Frame(root)
 frame.pack()
 
-canvas = Canvas(frame, bg="black", width=500, height=500)
+canvas = Canvas(frame, bg="light blue", width=1500, height=1500)
 canvas.pack()
 
-photoimage = ImageTk.PhotoImage(file="./images/Blue_circle.png")
-canvas.create_image(150, 150, image=photoimage)
+image_count = 0
+rows_count = -1
+columns_count = 0
 
+for s in shapes:
+	rows_count += 1
+   	columns_count = 0
+	for c in colors:
+		filepath = './images/'
+		filepath += c
+		filepath += '_'
+		filepath += s
+		filepath += '.png'
+		print filepath
+
+		image_count += 1
+        im = Image.open(filepath)
+        resized = im.resize((50, 50), Image.ANTIALIAS)
+        tkimage = ImageTk.PhotoImage(resized)
+        myvar = Label(canvas, image=tkimage)
+        myvar.image = tkimage
+        myvar.grid(row = rows_count, column = columns_count)
+        print rows_count
+        print columns_count
+        columns_count += 1
 
 root.mainloop()
