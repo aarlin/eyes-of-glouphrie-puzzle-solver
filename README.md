@@ -4,6 +4,6 @@ Images taken from http://2007.runescape.wikia.com/
 
 ## Why did I make this?
 Started playing OSRS again and came across this quest.  
-I did this quest when I was younger, and when I was doing it again I had extreme trouble trying to get the correct amount to unlock the machine. So I decided I'd make a program to help me see if I have the solution in my inventory
+I did this quest when I was younger, and when I was doing it again I had trouble trying to get the correct amount to unlock the machine. So I decided I'd make a program to help me see if I have the solution in my inventory
 
 First time implementing with Tkinter

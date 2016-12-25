@@ -6,11 +6,15 @@
 # CLARIFY ON LOCK 
 # HOW TO DISPLAY SOLUTION
 # HOW TO GRAB ALL VALUES AND ASSIGN THEM THE CORRECT SHAPE+COLOR VALUE?
+# validatecommand for SpinBox
+# callback for button
 
-# from tkinter import *
-# Python 3.5 import line above
-
-from Tkinter import *	
+try:
+    # Python 3.x
+    from tkinter import * 
+except ImportError:
+    # Python 2.x
+    from Tkinter import *
 from PIL import Image, ImageTk
 
 colors = ['Red','Orange','Yellow','Green','Blue', 'Indigo', 'Violet']
