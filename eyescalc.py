@@ -31,7 +31,7 @@ shapes = ['circle', 'triangle', 'square', 'pentagon']
 frame = Frame(root)
 frame.pack()
 
-canvas = Canvas(frame, bg="light blue", width=1500, height=1500)
+canvas = Canvas(frame, bg="grey23", width=1500, height=1500)
 canvas.pack()
 
 rows_count = 0
@@ -40,25 +40,30 @@ images = []
 
 for s in shapes:
 	for c in colors:
-		print("C: " + str(c))
 		filepath = './images/'
-		filepath += c
+		filepath += c 				
 		filepath += '_'
-		filepath += s
+		filepath += s 			# ITERATE THROUGH THE SHAPES OF THE SAME COLOR
 		filepath += '.png'
-		im = Image.open(filepath)
-		resized = im.resize((50, 50), Image.ANTIALIAS)
-		tkimage = ImageTk.PhotoImage(resized)
-		myvar = Label(canvas, image = tkimage)
-		myvar.image = tkimage
-		images.append(tkimage)
-		myvar.grid(row = rows_count, column = columns_count)
 
-		print("ROWS :" + str(rows_count))
-		print("COLUMNS: " + str(columns_count))
+		im = Image.open(filepath)
+		resized_image = im.resize((40, 40), Image.ANTIALIAS)
+		shape_image = ImageTk.PhotoImage(resized_image)
+		shape_label = Label(canvas, image = shape_image)
+		shape_label.image = shape_image							# KEEP REFERENCE SO NO GARAGE COLLECTOR
+		shape_label.grid(row = rows_count, column = columns_count, pady = 5)
+
 		columns_count += 1
         
 	rows_count += 1
    	columns_count = 0
+	for c in colors:
+		shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15)
+		# shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15, background = "white")
+		shapecount.grid(row = rows_count, column = columns_count, padx = 5, pady = 5)
+		columns_count += 1
+
+	rows_count += 1
+	columns_count += 0
 
 root.mainloop()
