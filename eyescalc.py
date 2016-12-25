@@ -1,17 +1,11 @@
 # EYES OF GLOUPHRIE CALCULATOR
 
 # LIGHT GREEN OUTLINE TO BOX OF IMAGE WHERE IT IS MORE THAN 0
-# CHECK BUTTON FOR SOLUTION CHECKING
-# USE SPINBOX
 # TURN .PY TO .EXE
-
-
-# r = 0
-# for c in colours:
-#     Label(text=c, relief=RIDGE,width=15).grid(row=r,column=0)
-#     Entry(bg=c, relief=SUNKEN,width=10).grid(row=r,column=1)
-#     r = r + 1
-
+# HELP BUTTON ?
+# CLARIFY ON LOCK 
+# HOW TO DISPLAY SOLUTION
+# HOW TO GRAB ALL VALUES AND ASSIGN THEM THE CORRECT SHAPE+COLOR VALUE?
 
 # from tkinter import *
 # Python 3.5 import line above
@@ -28,7 +22,7 @@ root.title("Eyes of Glouphrie Calculator")
 frame = Frame(root)
 frame.pack()
 
-canvas = Canvas(frame, bg="grey23", width=1500, height=1500)
+canvas = Canvas(frame, bg="grey23", width=1500, height=2000)
 canvas.pack()
 
 rows_count = 0
@@ -57,7 +51,7 @@ for s in shapes:
 	columns_count = 0
 
 	for c in colors:
-		shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15)
+		shapecount = Spinbox(canvas, from_= 0, to = 50, width = 15)
 		# shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15, background = "white")
 		shapecount.grid(row = rows_count, column = columns_count, padx = 5, pady = 5)
 
@@ -66,27 +60,50 @@ for s in shapes:
 	rows_count += 1
 	columns_count = 0
 
-# LOCK SCREENS (AMOUNTS TO BE FOUND)
 
-#for i in range(4):
-# Label(canvas, text = "First Lock").grid(rows = rows_count, column = 3)
-# Entry(canvas).grid(rows = rows_count, column = 4)
-# rows_count += 1
+# LABEL FOR LOCKS
+first_lock = Label(canvas, text = "First Lock:		")
+first_lock.grid(row = rows_count, column = 1, sticky = E)
+
+first_entry = Entry(canvas, width = 10)
+first_entry.grid(row = rows_count, column = 2, pady = 5, sticky = W+E)
+
+rows_count += 1
+
+second_lock = Label(canvas, text = "Second Lock:	")
+second_lock.grid(row = rows_count, column = 1, sticky = E)
+
+second_entry = Entry(canvas, width = 10)
+second_entry.grid(row = rows_count, column = 2, pady = 5, sticky = W+E)
+
+rows_count += 1
+
+third_lock = Label(canvas, text = "Third Lock:	")
+third_lock.grid(row = rows_count, column = 1, sticky = E)
+
+third_entry = Entry(canvas, width = 10)
+third_entry.grid(row = rows_count, column = 2, pady = 5, sticky = W+E)
+
+rows_count += 1
+
+fourth_lock = Label(canvas, text = "Fourth Lock:	")
+fourth_lock.grid(row = rows_count, column = 1, sticky = E)
+
+fourth_entry = Entry(canvas, width = 10)
+fourth_entry.grid(row = rows_count, column = 2, pady = 5, sticky = W+E)
 
 # BUTTONS
-for i in range(7):
-	if i == 3:
-		check_button = Button(canvas, text = "Check inventory")	# CHECK BUTTON
-		check_button.grid(row = rows_count, column = i, padx = 5, pady = 5, sticky = N+W+S+E)
-		# command=callback
+# command=callback
 
-	if i == 4:
-		reset_button = Button(canvas, text = "Reset values") 	# RESET BUTTON 
-		reset_button.grid(row = rows_count, column = i, padx = 5, pady = 5, sticky = N+W+S+E)
+rows_count -= 2
 
-	# if i == 4:
-	# 	quit_button = Button(canvas, text = "Quit program") 	# QUIT BUTTON
-	# 	quit_button.grid(row = rows_count, column = i, padx = 5, pady = 5, sticky = N+W+S+E)
+reset_button = Button(canvas, text = "Reset values") 	# RESET BUTTON 
+reset_button.grid(row = rows_count, column = 4, pady = 5, sticky = N+W+S+E)
 
+check_button = Button(canvas, text = "Check inventory")	# CHECK BUTTON
+check_button.grid(row = rows_count + 1, column = 4, pady = 5, sticky = N+W+S+E)
+
+# quit_button = Button(canvas, text = "Quit program") 	# QUIT BUTTON
+# quit_button.grid(row = rows_count + 2, column = 4, pady = 5, sticky = N+W+S+E)
 
 root.mainloop()
