@@ -52,18 +52,24 @@ for s in shapes:
 		shape_label = Label(canvas, image = shape_image)
 		shape_label.image = shape_image							# KEEP REFERENCE SO NO GARAGE COLLECTOR
 		shape_label.grid(row = rows_count, column = columns_count, pady = 5)
+		print ("ROWS1: " + str(rows_count))
+		print ("COLUMNS1: " + str(columns_count)) 
 
 		columns_count += 1
-        
+
 	rows_count += 1
-   	columns_count = 0
+	columns_count = 0
+
 	for c in colors:
 		shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15)
 		# shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15, background = "white")
 		shapecount.grid(row = rows_count, column = columns_count, padx = 5, pady = 5)
+
+		print ("ROWS2: " + str(rows_count))
+		print ("COLUMNS2: " + str(columns_count)) 
 		columns_count += 1
 
 	rows_count += 1
-	columns_count += 0
+	columns_count = 0
 
 root.mainloop()
