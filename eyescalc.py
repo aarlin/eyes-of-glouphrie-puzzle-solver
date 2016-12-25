@@ -12,6 +12,7 @@
 
 # THIS IS FOR CHECKING IF CURRENT INVENTORY HAS SOLUTION
 # WHAT IF PERSON HAS ITEMS THAT CAN BE CHANGED TO A SOLUTION?
+# USE OF TUPLES, LISTS, DICTIONARY
 
 try:
     # Python 3.x
@@ -23,20 +24,28 @@ from PIL import Image, ImageTk
 
 colors = ['Red','Orange','Yellow','Green','Blue', 'Indigo', 'Violet']
 shapes = ['circle', 'triangle', 'square', 'pentagon']
-values = [1, 2, 3, 4, 5, 6, 7, 			# CORRESPONDING TO RED CIRCLE, ORANGE CIRCLE, YELLOW CIRCLE, ETC. IN ORDER
-			3, 6, 9, 12, 15, 18, 21, 
-			4, 8, 12, 16, 20, 24, 28,
-			5, 10, 15, 20, 25, 30, 35]
+values = {'Red_circle':1, 'Orange_circle':2, 'Yellow_circle':3, 'Green_circle':4, \
+		'Blue_circle':5, 'Indigo_circle':6, 'Violet_circle':7, \
+		'Red_triangle':3, 'Orange_triangle':6, 'Yellow_triangle':9, 'Green_triangle':12, \
+		'Blue_triangle':15, 'Indigo_triangle':18, 'Violet_triangle':21, \
+		'Red_square':4, 'Orange_square':8, 'Yellow_square':12, 'Green_square':16, \
+		'Blue_square':20, 'Indigo_square':24, 'Violet_square':28, \
+		'Red_pentagon':5, 'Orange_pentagon':10, 'Yellow_pentagon':15, \
+		'Green_pentagon':20, 'Blue_pentagon':25, 'Indigo_pentagon':30, 'Violet_pentagon':35}
 
 def reset():
 	# ITERATE THROUGH THE DATA STUCTURE HOLDING ALL SPINBOXES AND ENTRY
 	# RESET ALL VALUES THEY HOLD
 	for widgets in spin_widgets:
-		widgets.delete(0, END)
+		widgets.delete(0, END)		# CLEARS WIDGET VALUEa
+		widgets.insert(0, 0)		# RESET TO 0
 	for widgets in entry_widgets:
 		widgets.delete(0, END)
 
 def check():
+	for widgets in spin_widgets:
+		spin_countwidget.gets()
+
 	# CHECK ALL SPINBOXES AND SEES IF WE HAVE SHAPES THAT SOLVE EACH LOCK
 	print "check"
 
@@ -52,8 +61,10 @@ canvas.pack()
 
 rows_count = 0
 columns_count = 0
-spin_widgets = []
-entry_widgets = []
+spin_widgets = []		# STRUCTURE TO HOLD ALL SPIN BOX WIDGETS
+entry_widgets = []		# STRUCTURE TO HOLD ALL ENTRY WIDGETS
+spin_counts = [0] * 28	# INITIALIZE THE A
+entry_counts = [0] * 4
 
 # IMAGES AND SPIN BOXES
 for s in shapes:
