@@ -34,30 +34,31 @@ frame.pack()
 canvas = Canvas(frame, bg="light blue", width=1500, height=1500)
 canvas.pack()
 
-image_count = 0
-rows_count = -1
+rows_count = 0
 columns_count = 0
+images = []
 
 for s in shapes:
-	rows_count += 1
-   	columns_count = 0
 	for c in colors:
+		print("C: " + str(c))
 		filepath = './images/'
 		filepath += c
 		filepath += '_'
 		filepath += s
 		filepath += '.png'
-		print filepath
+		im = Image.open(filepath)
+		resized = im.resize((50, 50), Image.ANTIALIAS)
+		tkimage = ImageTk.PhotoImage(resized)
+		myvar = Label(canvas, image = tkimage)
+		myvar.image = tkimage
+		images.append(tkimage)
+		myvar.grid(row = rows_count, column = columns_count)
 
-		image_count += 1
-        im = Image.open(filepath)
-        resized = im.resize((50, 50), Image.ANTIALIAS)
-        tkimage = ImageTk.PhotoImage(resized)
-        myvar = Label(canvas, image=tkimage)
-        myvar.image = tkimage
-        myvar.grid(row = rows_count, column = columns_count)
-        print rows_count
-        print columns_count
-        columns_count += 1
+		print("ROWS :" + str(rows_count))
+		print("COLUMNS: " + str(columns_count))
+		columns_count += 1
+        
+	rows_count += 1
+   	columns_count = 0
 
 root.mainloop()
