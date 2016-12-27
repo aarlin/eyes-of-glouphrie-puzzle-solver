@@ -12,7 +12,7 @@
 # WHAT IF PERSON HAS ITEMS THAT CAN BE CHANGED TO A SOLUTION?
 # USE OF TUPLES, LISTS, DICTIONARY
 
-# THIS CAN BE DONE IN A MORE EFFICIENT ALGORITHM BUT I CANT THINK OF ONE
+# IM SURE THIS CAN BE DONE FOR SIMPLY
 
 try:
     # Python 2.x
@@ -32,6 +32,9 @@ values = [('Red_circle',1), 	('Orange_circle',2),	('Yellow_circle',3), 	('Green_
 		('Blue_square',20), 	('Indigo_square',24), 	('Violet_square',28), 
 		('Red_pentagon',5), 	('Orange_pentagon',10), ('Yellow_pentagon',15), ('Green_pentagon',20), 
 		('Blue_pentagon',25), 	('Indigo_pentagon',30), ('Violet_pentagon',35)]
+dictvalues = dict(values)
+
+print dictvalues['Red_circle']
 
 def reset():
 	# ITERATE THROUGH THE DATA STUCTURE HOLDING ALL SPINBOXES AND ENTRY
@@ -43,24 +46,31 @@ def reset():
 		widgets.delete(0, END)
 
 def check():
-	for widgets, index in enumerate(spin_widgets):
-		spin_counts[index] = widget.get()			# GET SPIN BOX VALUES AND STORE INTO INDEX OF LIST OF COUNTERS
-	for widgets, index in enumerate(entry_widgets):
-		entry_counts[index] = widget.get()
+	for index, widgets in enumerate(spin_widgets):
+		spin_counts[index] = widgets.get()			# GET SPIN BOX VALUES AND STORE INTO INDEX OF LIST OF COUNTERS
+	for index, widgets in enumerate(entry_widgets):
+		entry_counts[index] = widgets.get()
+
 
 	i = 0		# ITERATE THROUGH SPIN COUNTS
 	j = 0		# ITERATE THROUGH ENTRY COUNTS
 	for s in shapes:
 		for c in colors:
 			key = c + '_' + s
-			shape_counts[key] = spin_counts[i]	# STORE SHAPE COUNT INTO DICTIONARY
+			shape_counts[key] = spin_counts[i]	# STORE SHAPE COUNT FROM SPIN BOX ENTRY INTO DICTIONARY
 			i += 1
 
-	for entry, index in enumerate(entry_counts):	# GO THROUGH THE LOCKS AND TRY TO FIND SOLUTION FROM SHAPE COUNTS
+	for entry in entry_counts:	# GO THROUGH THE LOCKS AND TRY TO FIND SOLUTION FROM SHAPE COUNTS
 		for s in shapes:
 			for c in colors:
 				key = c + '_' + s
-				print key
+				if shape_counts[key] > 0:
+					if entry != "":
+						if int(entry) == int(dictvalues[key]):
+							print("ENTRY: ")
+							print entry
+							print key
+							shape_counts[key] = int(shape_counts[key]) - 1
 
 
 
@@ -96,13 +106,13 @@ rows_count = 0
 columns_count = 0
 spin_widgets = []		# STRUCTURE TO HOLD ALL SPIN BOX WIDGETS
 entry_widgets = []		# STRUCTURE TO HOLD ALL ENTRY WIDGETS
-spin_counts = (0) * 28	# LIST OF COUNTS BASED ON SPIN BOXES
-entry_counts = (0) * 4	# VALUES OF THE LOCKS (FIRST TO FOURTH)
-shape_counts = {'Red_circle':0, 'Orange_circle':0,		'Yellow_circle':0,		'Green_circle':0,
-			'Blue_circle':0, 	'Indigo_circle':0, 		'Violet_circle':0,
+spin_counts = [0] * 28	# LIST OF COUNTS BASED ON SPIN BOXES
+entry_counts = [0] * 4	# VALUES OF THE LOCKS (FIRST TO FOURTH)
+shape_counts = {'Red_circle':0, 'Orange_circle':0, 		'Yellow_circle':0,		'Green_circle':0,
+			'Blue_circle':0, 	'Indigo_circle':0,  	'Violet_circle':0,
 			'Red_triangle':0, 	'Orange_triangle':0, 	'Yellow_triangle':0,	'Green_triangle':0, 
 			'Blue_triangle':0, 	'Indigo_triangle':0, 	'Violet_triangle':0,
-			'Red_square',0, 	'Orange_square':0, 		'Yellow_square':0,		'Green_square':0, 
+			'Red_square':0, 	'Orange_square':0, 		'Yellow_square':0,		'Green_square':0, 
 			'Blue_square':0, 	'Indigo_square':0, 		'Violet_square':0, 
 			'Red_pentagon':0, 	'Orange_pentagon':0,	'Yellow_pentagon':0,	'Green_pentagon':0, 
 			'Blue_pentagon':0, 	'Indigo_pentagon':0, 	'Violet_pentagon':0}
