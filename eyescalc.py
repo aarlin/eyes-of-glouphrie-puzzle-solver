@@ -32,6 +32,19 @@
 # Surprised to find out that this was a knapsack problem / subset sum problem. 
 # I took Skiena's Algorithm class this past semester albiet didn't pay much attention to his class
 
+# HOW SHOULD I IMPLEMENT SOLUTION?
+# SHOULD I GO IN ORDER... LETS SAY FIRST LOCK USES A RED CIRCLE
+# THAT MEANS ITS TAKEN AWAY FROM THE SOLUTIONS OF SECOND, THIRD, FOURTH LOCKS
+
+# COULD OF JUST ITERATED THROUGH DICTIONARY AND ADDED COUNTS, INSTEAD OF DOING SPIN_COUNT ARRAY
+
+# THE PROGRAM DOESNT GIVE ALL COMBINATIONS OF SOLUTIONS
+# RATHER IT TRIES TO SOLVE THE LOCKS IN ORDER AND DELETES THE SHAPE NEEDED FOR THAT LOCK
+# THE SUBSEQUENT LOCKS DONT HAVE ACCESS TO THAT SHAPE ANYMORE
+# WHAT IF THERE ARE MULTIPLE SOLUTIONS? THAT IS SOMETHING I HAVENT DECIDED UPON YET
+
+# IF I ORDERED THE DICT, THEN I COULDVE USED BINARY SEARCH TO LOOK FOR 1 SHAPE FOR FIRST AND SECOND LOCK
+
 try:
     # Python 2.x
     from Tkinter import * 
@@ -69,24 +82,49 @@ def check():
 
 
 	i = 0		# ITERATE THROUGH SPIN COUNTS
-	j = 0		# ITERATE THROUGH ENTRY COUNTS
-	for s in shapes:
+	for s in shapes:		
 		for c in colors:
 			key = c + '_' + s
 			shape_counts[key] = spin_counts[i]	# STORE SHAPE COUNT FROM SPIN BOX ENTRY INTO DICTIONARY
 			i += 1
 
-	for entry in entry_counts:	# GO THROUGH THE LOCKS AND TRY TO FIND SOLUTION FROM SHAPE COUNTS
-		for s in shapes:
-			for c in colors:
-				key = c + '_' + s
-				if shape_counts[key] > 0:
-					if entry != "":
-						if int(entry) == int(dictvalues[key]):
-							print("ENTRY: ")
-							print entry
-							print key
-							shape_counts[key] = int(shape_counts[key]) - 1
+	knapsack = []
+
+	for key, value in shape_counts.items():		# THIS ISN'T ITERATING IN ORDER
+		for i in range(int(value)):
+			knapsack.append(dictvalues[key])	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
+
+	a = solution(knapsack, entry_counts[0], 1)	# CHECK SOLUTION FOR FIRST LOCK
+	b = solution(knapsack, entry_counts[1], 1)	# CHECK SOLUTION FOR SECOND LOCK
+	c = solution(knapsack, entry_counts[2], 2)	# CHECK SOLUTION FOR THIRD LOCK
+	d = solution(knapsack, entry_counts[3], 3)	# CHECK SOLUTION FOR FOURTH LOCK
+
+	print knapsack
+	print entry_counts[0]
+	print entry_counts[1]
+
+
+	print a
+	print b
+	print c
+	print d
+
+
+def solution(knapsack, lock, shapes):
+	# KNAPSACK IS THE LIST OF SHAPE VALUES TAKEN FROM THE SPIN BOXES
+	# LOCK IS THE LOCK VALUE WE'RE LOOKING TO SOLVE
+	# SHAPES IS THE NUMBER OF SHAPES NEEDED TO UNLOCK THE LOCK
+	if lock == "":
+		return
+
+	if shapes == 1:			
+		# USING LINEAR SEARCHING O(n), RATHER THAN SORTING AND THEN BINARY SEARCH  O(nlogn + logn) = O(nlogn)
+		for item in knapsack:
+			if item == lock:
+				knapsack.remove(item)
+				return item
+
+
 
 
 
