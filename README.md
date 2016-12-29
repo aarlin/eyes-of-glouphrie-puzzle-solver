@@ -1,3 +1,5 @@
+### STILL WORK IN PROGRESS
+
 ## Runescape Eyes of Glouphrie Quest Calculator
 Python GUI implementation to help players calculate the shapes they have in their inventory.    
 Images taken from http://2007.runescape.wikia.com/  
@@ -9,10 +11,9 @@ I did this quest when I was younger, and when I was doing it again I had trouble
 I also wanted to work with some Python GUI. This was my first time implementing with Tkinter  
 
 ## Usage of Algorithms
-The premise of this calculator involved adding shapes that held a numerical weight into a lock.  
-The lock only opened itself with a certain weight.  
-This is an iteration of the subset sum problem.   
-Our shapes that we hold in our inventory will be our array/list of numbers  
-Our locks are the sum we are trying to find  
+The premise of this calculator involved adding shapes that held a numerical weight into a lock. The lock only opened itself with a certain weight.  
+This is a variation of the subset sum problem.  
+
+Our shapes that we hold in our inventory will be our array/list of numbers.  Our locks are the sum we are trying to find. 
 Unlike the subset sum problem, we are restricted to a number of shapes allowed to open the lock.  
 That is to say, if one lock has a limit of two shapes, we are lookng for a pair in the array that equals that lock weight  

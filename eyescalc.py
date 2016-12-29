@@ -45,6 +45,12 @@
 
 # IF I ORDERED THE DICT, THEN I COULDVE USED BINARY SEARCH TO LOOK FOR 1 SHAPE FOR FIRST AND SECOND LOCK
 
+# LETS SAY YOU DO RETURN ALL POSSIBLE SOLUTIONS TO THE USER WITHOUT TAKING AWAY SHAPES USED FROM OTHER LOCKS
+# EHH, THAT MEANS THEY WILL HAVE TO FIND A SOLUTION OUT OF THE SOLUTIONS YOU GIVE THEM...
+# NOT REALLY WANTED. THEY JUST WANT YOU TO TELL THEM THE ANSWER
+# SO, WE DO TAKE AWAY A SHAPE AFTER ITS BEEN USED. THAT ALSO MEANS WE SHOULD STOP AFTER FINDING ONE SOLUTION
+# OR ELSE THE SUBSEQUENT LOCKS WONT HAVE ANY SOLUTIONS BECAUSE A PREVIOUS LOCK MIGHT BE TAKING A BUNCH OF SHAPES
+
 try:
     # Python 2.x
     from Tkinter import * 
@@ -52,6 +58,7 @@ except ImportError:
 	# Python 3.x
     from tkinter import *
 from PIL import Image, ImageTk
+from collections import Counter, OrderedDict
 
 colors = ['Red','Orange','Yellow','Green','Blue', 'Indigo', 'Violet']
 shapes = ['circle', 'triangle', 'square', 'pentagon']
@@ -94,57 +101,37 @@ def check():
 		for i in range(int(value)):
 			knapsack.append(dictvalues[key])	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
 
+			
+	# FIRST LOCK = 1 SHAPE NEEDED
+	# SECOND LOCK = 1 SHAPE NEEDED
+	# THIRD LOCK = 2 SHAPES NEEDED
+	# FOURTH LOCK = 3 SHAPES NEEDED
+
 	a = solution(knapsack, entry_counts[0], 1)	# CHECK SOLUTION FOR FIRST LOCK
 	b = solution(knapsack, entry_counts[1], 1)	# CHECK SOLUTION FOR SECOND LOCK
 	c = solution(knapsack, entry_counts[2], 2)	# CHECK SOLUTION FOR THIRD LOCK
 	d = solution(knapsack, entry_counts[3], 3)	# CHECK SOLUTION FOR FOURTH LOCK
 
-	print knapsack
-	print entry_counts[0]
-	print entry_counts[1]
-
-
-	print a
-	print b
-	print c
-	print d
-
-
 def solution(knapsack, lock, shapes):
-	# KNAPSACK IS THE LIST OF SHAPE VALUES TAKEN FROM THE SPIN BOXES
-	# LOCK IS THE LOCK VALUE WE'RE LOOKING TO SOLVE
-	# SHAPES IS THE NUMBER OF SHAPES NEEDED TO UNLOCK THE LOCK
-	if lock == "":
-		return
+	# knapsack 	THE LIST OF SHAPE VALUES TAKEN FROM THE SPIN BOXES
+	# lock:		THE LOCK VALUE WE'RE LOOKING TO SOLVE
+	# shapes: 	THE NUMBER OF SHAPES NEEDED TO UNLOCK THE LOCK
 
-	if shapes == 1:			
-		# USING LINEAR SEARCHING O(n), RATHER THAN SORTING AND THEN BINARY SEARCH  O(nlogn + logn) = O(nlogn)
-		for item in knapsack:
-			if item == lock:
-				knapsack.remove(item)
-				return item
+	solution = []
 
-
-
-
-
-	# SO I HAVE THE COUNT OF EVERY SPIN BOX STORED INTO COUNT LISTS
-	# NOW I NEED TO CHECK IF THEY HAVE SOLUTION...
-	# I NEED TO MULTIPLY 
-	# WHAT IF I HAVE TWO LISTS OF TUPLES...
-	# ITERATE THROUGH SHAPES AND COLORS NESTED FOR LOOP
-	# CALL LIST OF TUPLES THROUGH THAT FOR LOOP...
-
-
-	# CHECK ALL SPINBOXES AND SEES IF WE HAVE SHAPES THAT SOLVE EACH LOCK
-
-	# OKAY, RATHER THAN THAT. WE USE A LIST OF TUPLES FOR SHAPE VALUES
-	# AND A DICTIONARY FOR THE SHAPE COUNTS
-	# NOW WE NEED TO GO THROUGH THE LOCKS 
-	# FIRST LOCK = 1 SHAPE NEEDED
-	# SECOND LOCK = 1 SHAPE NEEDED
-	# THIRD LOCK = 2 SHAPES NEEDED
-	# FOURTH LOCK = 3 SHAPES NEEDED
+	if lock == "" or lock < 1:
+		return None
+	elif len(knapsack) == 0:
+		return None
+	else:
+		if shapes == 1:			
+			# USING LINEAR SEARCHING O(n), RATHER THAN SORTING AND THEN BINARY SEARCH  O(nlogn + logn) = O(nlogn)
+			for item in knapsack:
+				if item == lock:
+					solution.append(item)steam
+					knapsack.remove(item)
+					return solution
+		elif shapes == 2:
 
 
 root = Tk()
