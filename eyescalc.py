@@ -12,7 +12,25 @@
 # WHAT IF PERSON HAS ITEMS THAT CAN BE CHANGED TO A SOLUTION?
 # USE OF TUPLES, LISTS, DICTIONARY
 
-# IM SURE THIS CAN BE DONE FOR SIMPLY
+# IM SURE THIS CAN BE DONE MORE SIMPLY
+
+# THIS IS SUBSET SUM ALGORITHM... WE HAVE A SET/LIST OF VALUES AND WE NEED TO FIND A SUBSET THAT EQUALS THE LOCKS
+# ALSO KNAPSACK PROBLEM APPARENTLY
+
+# SO WE HAVE VALUES OF THE COLOR + SHAPES AND THE COUNTS OF THEM. WE SHOULD PUT ALL THE VALUES + COUNT TOGETHER INTO A LIST
+# EXAMPLE: WE HAVE 1 RED CIRCLE AND 2 BLUE CIRCLES. THE LIST WOULD BE [1, 5, 5]
+# THUS IT WILL BE EASIER TO DO SUBSET SUM PROBLEM
+# 3SUM PROBLEM?
+# HAD TO LOOK THIS PROBLEM UP
+# SORRY SKIENA (EVEN THOUGH I TOOK YOUR CLASS THIS PAST SEMESTER)
+# WAS THINKING OF THE NAIVE ALGORITHM
+
+# TIE THE WIDGET WITH THE COLOR + SHAPE IN A DICTIONARY???
+
+# ## Unexpected complications
+# I actually didn't expect to see use of algorithms while doing this project (didn't look that far ahead).
+# Surprised to find out that this was a knapsack problem / subset sum problem. 
+# I took Skiena's Algorithm class this past semester albiet didn't pay much attention to his class
 
 try:
     # Python 2.x
@@ -33,8 +51,6 @@ values = [('Red_circle',1), 	('Orange_circle',2),	('Yellow_circle',3), 	('Green_
 		('Red_pentagon',5), 	('Orange_pentagon',10), ('Yellow_pentagon',15), ('Green_pentagon',20), 
 		('Blue_pentagon',25), 	('Indigo_pentagon',30), ('Violet_pentagon',35)]
 dictvalues = dict(values)
-
-print dictvalues['Red_circle']
 
 def reset():
 	# ITERATE THROUGH THE DATA STUCTURE HOLDING ALL SPINBOXES AND ENTRY
