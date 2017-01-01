@@ -51,6 +51,9 @@
 # SO, WE DO TAKE AWAY A SHAPE AFTER ITS BEEN USED. THAT ALSO MEANS WE SHOULD STOP AFTER FINDING ONE SOLUTION
 # OR ELSE THE SUBSEQUENT LOCKS WONT HAVE ANY SOLUTIONS BECAUSE A PREVIOUS LOCK MIGHT BE TAKING A BUNCH OF SHAPES
 
+# HAVE MOUSEOVER OF COLOR AND SHAPE
+# HAVE LOCK SHAPE #
+
 try:
     # Python 2.x
     from Tkinter import * 
@@ -101,16 +104,31 @@ def check():
 		for i in range(int(value)):
 			knapsack.append(dictvalues[key])	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
 
-			
+
 	# FIRST LOCK = 1 SHAPE NEEDED
 	# SECOND LOCK = 1 SHAPE NEEDED
 	# THIRD LOCK = 2 SHAPES NEEDED
 	# FOURTH LOCK = 3 SHAPES NEEDED
 
-	a = solution(knapsack, entry_counts[0], 1)	# CHECK SOLUTION FOR FIRST LOCK
-	b = solution(knapsack, entry_counts[1], 1)	# CHECK SOLUTION FOR SECOND LOCK
-	c = solution(knapsack, entry_counts[2], 2)	# CHECK SOLUTION FOR THIRD LOCK
-	d = solution(knapsack, entry_counts[3], 3)	# CHECK SOLUTION FOR FOURTH LOCK
+	final_solution = []
+	try:
+		first_solution = solution(knapsack, int(entry_counts[0]), 1)	# CHECK SOLUTION FOR FIRST LOCK
+		second_solution = solution(knapsack, int(entry_counts[1]), 1)	# CHECK SOLUTION FOR SECOND LOCK
+		third_solution = solution(knapsack, int(entry_counts[2]), 2)	# CHECK SOLUTION FOR THIRD LOCK
+		fourth_solution = solution(knapsack, int(entry_counts[3]), 3)	# CHECK SOLUTION FOR FOURTH LOCK
+	except ValueError:
+		pass
+
+	try:
+		final_solution.append(first_solution)
+		final_solution.append(second_solution)
+		final_solution.append(third_solution)
+		final_solution.append(fourth_solution)
+	except UnboundLocalError:
+		final_solution.append([])
+
+	print final_solution
+
 
 def solution(knapsack, lock, shapes):
 	# knapsack 	THE LIST OF SHAPE VALUES TAKEN FROM THE SPIN BOXES
@@ -120,18 +138,41 @@ def solution(knapsack, lock, shapes):
 	solution = []
 
 	if lock == "" or lock < 1:
-		return None
-	elif len(knapsack) == 0:
-		return None
+		return solution
+	if len(knapsack) == 0:
+		return solution
 	else:
 		if shapes == 1:			
 			# USING LINEAR SEARCHING O(n), RATHER THAN SORTING AND THEN BINARY SEARCH  O(nlogn + logn) = O(nlogn)
 			for item in knapsack:
 				if item == lock:
-					solution.append(item)steam
+					solution.append(item)
 					knapsack.remove(item)
 					return solution
 		elif shapes == 2:
+			knaplen = len(knapsack)
+			for i in range(knaplen):
+				for j in range(i + 1, knaplen):
+					if knapsack[i] + knapsack[j] == lock:
+						solution.append(knapsack[i])
+						solution.append(knapsack[j])
+						knapsack.remove(knapsack[j])
+						knapsack.remove(knapsack[i])
+						return solution
+
+		elif shapes == 3:
+			knaplen = len(knapsack)
+			for i in range(knaplen):
+				for j in range(i + 1, knaplen):
+					for k in range(j + 1, knaplen):
+						if knapsack[i] + knapsack[j] + knapsack[k] == lock:
+							solution.append(knapsack[i])
+							solution.append(knapsack[j])
+							solution.append(knapsack[k])
+							knapsack.remove(knapsack[k])
+							knapsack.remove(knapsack[j])
+							knapsack.remove(knapsack[i])
+							return solution
 
 
 root = Tk()
