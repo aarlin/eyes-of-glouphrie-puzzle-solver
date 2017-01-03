@@ -10,7 +10,7 @@ I did this quest when I was younger, and when I was doing it again I had trouble
 
 I also wanted to work with some Python GUI. This was my first time implementing with Tkinter  
 
-## Usage of Algorithms
+## Type of Problem
 The premise of this calculator involved adding shapes that held a numerical weight into a lock. The lock only opened itself with a certain weight.  
 This is a variation of the subset sum problem.  
 

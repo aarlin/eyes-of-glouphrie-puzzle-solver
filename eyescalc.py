@@ -102,7 +102,7 @@ def check():
 
 	for key, value in shape_counts.items():		# THIS ISN'T ITERATING IN ORDER
 		for i in range(int(value)):
-			knapsack.append(dictvalues[key])	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
+			knapsack.append((key,dictvalues[key]))	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
 
 
 	# FIRST LOCK = 1 SHAPE NEEDED
@@ -112,10 +112,10 @@ def check():
 
 	final_solution = []
 	try:
-		first_solution = solution(knapsack, int(entry_counts[0]), 1)	# CHECK SOLUTION FOR FIRST LOCK
-		second_solution = solution(knapsack, int(entry_counts[1]), 1)	# CHECK SOLUTION FOR SECOND LOCK
-		third_solution = solution(knapsack, int(entry_counts[2]), 2)	# CHECK SOLUTION FOR THIRD LOCK
-		fourth_solution = solution(knapsack, int(entry_counts[3]), 3)	# CHECK SOLUTION FOR FOURTH LOCK
+		first_solution = find_solution(knapsack, int(entry_counts[0]), 1)	# CHECK SOLUTION FOR FIRST LOCK
+		second_solution = find_solution(knapsack, int(entry_counts[1]), 1)	# CHECK SOLUTION FOR SECOND LOCK
+		third_solution = find_solution(knapsack, int(entry_counts[2]), 2)	# CHECK SOLUTION FOR THIRD LOCK
+		fourth_solution = find_solution(knapsack, int(entry_counts[3]), 3)	# CHECK SOLUTION FOR FOURTH LOCK
 	except ValueError:
 		pass
 
@@ -127,11 +127,11 @@ def check():
 	except UnboundLocalError:
 		final_solution.append([])
 
-	print final_solution
+	solution_popup_message(final_solution)
 
 
-def solution(knapsack, lock, shapes):
-	# knapsack 	THE LIST OF SHAPE VALUES TAKEN FROM THE SPIN BOXES
+def find_solution(knapsack, lock, shapes):
+	# knapsack 	THE LIST OF TUPLES FOR SHAPE AND SHAPE VALUES TAKEN FROM THE SPIN BOXES
 	# lock:		THE LOCK VALUE WE'RE LOOKING TO SOLVE
 	# shapes: 	THE NUMBER OF SHAPES NEEDED TO UNLOCK THE LOCK
 
@@ -144,16 +144,16 @@ def solution(knapsack, lock, shapes):
 	else:
 		if shapes == 1:			
 			# USING LINEAR SEARCHING O(n), RATHER THAN SORTING AND THEN BINARY SEARCH  O(nlogn + logn) = O(nlogn)
-			for item in knapsack:
-				if item == lock:
-					solution.append(item)
-					knapsack.remove(item)
+			for (shape, value) in knapsack:
+				if value == lock:
+					solution.append((shape, value))
+					knapsack.remove((shape, value))
 					return solution
 		elif shapes == 2:
 			knaplen = len(knapsack)
 			for i in range(knaplen):
 				for j in range(i + 1, knaplen):
-					if knapsack[i] + knapsack[j] == lock:
+					if knapsack[i][1] + knapsack[j][1] == lock:
 						solution.append(knapsack[i])
 						solution.append(knapsack[j])
 						knapsack.remove(knapsack[j])
@@ -165,14 +165,52 @@ def solution(knapsack, lock, shapes):
 			for i in range(knaplen):
 				for j in range(i + 1, knaplen):
 					for k in range(j + 1, knaplen):
-						if knapsack[i] + knapsack[j] + knapsack[k] == lock:
+						if knapsack[i][1] + knapsack[j][1] + knapsack[k][1] == lock:
 							solution.append(knapsack[i])
 							solution.append(knapsack[j])
 							solution.append(knapsack[k])
-							knapsack.remove(knapsack[k])
+							knapsack.remove(knapsack[k])	# REMOVE IN REVERSE ORDER
 							knapsack.remove(knapsack[j])
 							knapsack.remove(knapsack[i])
 							return solution
+
+def solution_popup_message(solution):
+	rows_count = 1
+	columns_count = 1
+
+	top = Toplevel()
+	top.title("Solution")
+
+	first_lock = Label(top, text = "  First lock:		")
+	first_lock.grid(row = 1, column = 0)
+
+	second_lock = Label(top, text = "  Second lock:		")
+	second_lock.grid(row = 3, column = 0)
+
+	third_lock = Label(top, text = "  Third lock:		")
+	third_lock.grid(row = 5, column = 0)
+
+	fourth_lock = Label(top, text = "  Fourth lock:		")
+	fourth_lock.grid(row = 7, column = 0)
+
+	button = Button(top, text = "Dismiss", command = top.destroy)
+	button.grid(row = 9, column = 1)
+
+	for lock_solution in solution:
+		for (key, value) in lock_solution:
+			filepath = './images/'
+			filepath += key		# ITERATE THROUGH THE SHAPES OF THE SAME COLOR
+			filepath += '.png'
+
+			im = Image.open(filepath)
+			resized_image = im.resize((40, 40), Image.ANTIALIAS)
+			shape_image = ImageTk.PhotoImage(resized_image)
+			shape_label = Label(top, image = shape_image)
+			shape_label.image = shape_image							# KEEP REFERENCE SO NO GARAGE COLLECTOR
+			shape_label.grid(row = rows_count, column = columns_count, padx = 10, pady = 5, sticky = N+W+S+E)
+			columns_count += 1
+		rows_count += 2
+		columns_count = 1
 
 
 root = Tk()
