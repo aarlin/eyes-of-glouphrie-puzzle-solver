@@ -1,6 +1,5 @@
 # EYES OF GLOUPHRIE CALCULATOR
 
-# LIGHT GREEN OUTLINE TO BOX OF IMAGE WHERE IT IS MORE THAN 0
 # TURN .PY TO .EXE
 # HELP BUTTON ?
 # CLARIFY ON LOCK 
@@ -54,6 +53,14 @@
 # HAVE MOUSEOVER OF COLOR AND SHAPE
 # HAVE LOCK SHAPE #
 
+#bad format of gui -- nothing instead of 0
+#making rows to solution more visible
+#mousing over shape and their names
+#comment - readable for future use
+#no solution = more visible that there are no solutions??
+#py to exe
+#didnt do OOP
+
 try:
     # Python 2.x
     from Tkinter import * 
@@ -74,6 +81,19 @@ values = [('Red_circle',1), 	('Orange_circle',2),	('Yellow_circle',3), 	('Green_
 		('Red_pentagon',5), 	('Orange_pentagon',10), ('Yellow_pentagon',15), ('Green_pentagon',20), 
 		('Blue_pentagon',25), 	('Indigo_pentagon',30), ('Violet_pentagon',35)]
 dictvalues = dict(values)
+
+def help():
+	top = Toplevel()
+	top.title("Help")
+	helpmsg = Message(top, width = 300, text = "1. Fill the number of shapes you currently have in your inventory to the corresponding entries. \n \
+		\n 2. Fill the the lock values that are given when you click the machine. \n \
+		\n 3. First lock corresponds to the initial lock that opens the other three locks. This has only one shape requirement \n \
+		\n Second lock needs one shape, third lock needs two shapes, and fourth lock needs three shapes. \n \
+		\n 4. Press the button named 'Check inventory' so the calculator can check for solutions. ")
+	helpmsg.pack()
+
+	dismiss = Button(top, text = "Dismiss", command = top.destroy)
+	dismiss.pack()
 
 def reset():
 	# ITERATE THROUGH THE DATA STUCTURE HOLDING ALL SPINBOXES AND ENTRY
@@ -127,7 +147,7 @@ def check():
 	except UnboundLocalError:
 		final_solution.append([])
 
-	solution_popup_message(final_solution)
+	solution_popup_message(final_solution)		# DISPLAY A POPUP MESSAGE FOR SOLUTION TO LOCKS
 
 
 def find_solution(knapsack, lock, shapes):
@@ -137,9 +157,9 @@ def find_solution(knapsack, lock, shapes):
 
 	solution = []
 
-	if lock == "" or lock < 1:
+	if lock == "" or lock < 1:		# IF LOCK HAS NO VALUE OR IS LESS THAN 1, WE SHOULD RETURN AN EMPTY LIST
 		return solution
-	if len(knapsack) == 0:
+	if len(knapsack) == 0:			# IF LENGTH OF KNAPSACK IS EMPTY, WE SHOULD ALSO RETURN AN EMPTY LIST
 		return solution
 	else:
 		if shapes == 1:			
@@ -156,7 +176,7 @@ def find_solution(knapsack, lock, shapes):
 					if knapsack[i][1] + knapsack[j][1] == lock:
 						solution.append(knapsack[i])
 						solution.append(knapsack[j])
-						knapsack.remove(knapsack[j])
+						knapsack.remove(knapsack[j])	# REMOVE IN REVERSE ORDER BECAUSE LIST INDEX WILL BE PRESERVED
 						knapsack.remove(knapsack[i])
 						return solution
 
@@ -169,7 +189,7 @@ def find_solution(knapsack, lock, shapes):
 							solution.append(knapsack[i])
 							solution.append(knapsack[j])
 							solution.append(knapsack[k])
-							knapsack.remove(knapsack[k])	# REMOVE IN REVERSE ORDER
+							knapsack.remove(knapsack[k])	# REMOVE IN REVERSE ORDER BECAUSE LIST INDEX WILL BE PRESERVED
 							knapsack.remove(knapsack[j])
 							knapsack.remove(knapsack[i])
 							return solution
@@ -196,7 +216,7 @@ def solution_popup_message(solution):
 	button = Button(top, text = "Dismiss", command = top.destroy)
 	button.grid(row = 9, column = 1)
 
-	for lock_solution in solution:
+	for lock_solution in solution:			# GO THROUGH THE LIST OF SOLUTIONS AND ADD TO TOPLEVEL WINDOW
 		for (key, value) in lock_solution:
 			filepath = './images/'
 			filepath += key		# ITERATE THROUGH THE SHAPES OF THE SAME COLOR
@@ -212,7 +232,8 @@ def solution_popup_message(solution):
 		rows_count += 2
 		columns_count = 1
 
-
+# START OF PROGRAM
+# CREATING WINDOW
 root = Tk()
 root.title("Eyes of Glouphrie Calculator")
 
@@ -238,36 +259,36 @@ shape_counts = {'Red_circle':0, 'Orange_circle':0, 		'Yellow_circle':0,		'Green_
 			'Blue_pentagon':0, 	'Indigo_pentagon':0, 	'Violet_pentagon':0}
 
 # IMAGES AND SPIN BOXES
-for s in shapes:
-	for c in colors:
-		filepath = './images/'
+for s in shapes:				# GO THROUGH EACH SHAPE AND COLOR IN PREDETERMINED ORDER
+	for c in colors:			
+		filepath = './images/'	# GET THE IMAGE OF THIS SHAPE + COLOR
 		filepath += c 				
 		filepath += '_'
 		filepath += s 			# ITERATE THROUGH THE SHAPES OF THE SAME COLOR
 		filepath += '.png'
 
-		im = Image.open(filepath)
+		im = Image.open(filepath)			# OPEN AND INSERT IMAGE TO LABEL
 		resized_image = im.resize((40, 40), Image.ANTIALIAS)
 		shape_image = ImageTk.PhotoImage(resized_image)
 		shape_label = Label(canvas, image = shape_image)
 		shape_label.image = shape_image							# KEEP REFERENCE SO NO GARAGE COLLECTOR
 		shape_label.grid(row = rows_count, column = columns_count, pady = 5)
 
-		columns_count += 1
+		columns_count += 1	# GO TO NEXT COLUMN FOR NEXT SHAPE
 
-	rows_count += 1
-	columns_count = 0
+	rows_count += 1		# GO TO NEW ROW AFTER DOING ALL COLORS OF ONE SHAPE
+	columns_count = 0	# RESET COLUMN TO 0 AFTER EACH SHAPE
 
-	for c in colors:
+	for c in colors:		# CREATE SPINBOXES UNDER EACH SHAPE
 		shapecount = Spinbox(canvas, from_= 0, to = 50, width = 15)
 		# shapecount = Spinbox(canvas, from_= 0, to = 10, width = 15, background = "white")
 		shapecount.grid(row = rows_count, column = columns_count, padx = 5, pady = 5)
 		spin_widgets.append(shapecount)
 
-		columns_count += 1
+		columns_count += 1	# GO TO NEXT COLUMN AFTER EACH SHAPE
 
-	rows_count += 1
-	columns_count = 0
+	rows_count += 1		# GO TO NEW ROW AFTER DOING ONE SHAPE
+	columns_count = 0	# RESET COLUMN TO 0 AFTER EACH SHAPE
 
 # LABEL FOR LOCKS
 first_lock = Label(canvas, text = "First Lock:		")
@@ -309,13 +330,13 @@ entry_widgets.append(fourth_entry)
 
 rows_count -= 2		# MOVE BACK TO ALIGN BUTTONS TO BE ADDED
 
+help_button = Button(canvas, text = "Help", command = help)	# HELP BUTTON
+help_button.grid(row = rows_count, column = 4, pady = 5, sticky = N+W+S+E)
+
 reset_button = Button(canvas, text = "Reset values", command = reset) 	# RESET BUTTON 
-reset_button.grid(row = rows_count, column = 4, pady = 5, sticky = N+W+S+E)
+reset_button.grid(row = rows_count + 1, column = 4, pady = 5, sticky = N+W+S+E)
 
 check_button = Button(canvas, text = "Check inventory", command = check)	# CHECK BUTTON
-check_button.grid(row = rows_count + 1, column = 4, pady = 5, sticky = N+W+S+E)
-
-# quit_button = Button(canvas, text = "Quit program") 	# QUIT BUTTON
-# quit_button.grid(row = rows_count + 2, column = 4, pady = 5, sticky = N+W+S+E)
+check_button.grid(row = rows_count + 2, column = 4, pady = 5, sticky = N+W+S+E)
 
 root.mainloop()
