@@ -79,13 +79,16 @@ def reset():
 		widgets.delete(0, END)		# CLEARS WIDGET VALUE
 		widgets.insert(0, 0)		# RESET TO 0
 	for widgets in entry_widgets:
-		widgets.delete(0, END)
+		widgets.delete(0, 0)
 
 def check():
 	for index, widgets in enumerate(spin_widgets):
 		spin_counts[index] = widgets.get()			# GET SPIN BOX VALUES AND STORE INTO INDEX OF LIST OF COUNTERS
 	for index, widgets in enumerate(entry_widgets):
-		entry_counts[index] = widgets.get()
+		if widgets.get() == '':
+			entry_counts[index] = 0
+		else:
+			entry_counts[index] = widgets.get()
 
 
 	i = 0		# ITERATE THROUGH SPIN COUNTS
@@ -101,7 +104,6 @@ def check():
 		for i in range(int(value)):
 			knapsack.append((key,dictvalues[key]))	# ADD SHAPE VALUE INTO KNAPSACK FOR THE NUMBER RETURNED BY SPIN BOX
 
-
 	# FIRST LOCK = 1 SHAPE NEEDED
 	# SECOND LOCK = 1 SHAPE NEEDED
 	# THIRD LOCK = 2 SHAPES NEEDED
@@ -116,12 +118,16 @@ def check():
 	except ValueError:
 		pass
 
+
+
 	try:
 		final_solution.append(first_solution)
 		final_solution.append(second_solution)
 		final_solution.append(third_solution)
 		final_solution.append(fourth_solution)
 	except UnboundLocalError:
+		final_solution.append([])
+	except TypeError:
 		final_solution.append([])
 
 	solution_popup_message(final_solution)		# DISPLAY A POPUP MESSAGE FOR SOLUTION TO LOCKS
