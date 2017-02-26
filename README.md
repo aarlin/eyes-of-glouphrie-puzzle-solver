@@ -5,9 +5,9 @@ Python GUI implementation to help players calculate the shapes they have in thei
 Images taken from http://2007.runescape.wikia.com/  
 
 ## What should you do before running tool?
-You should try to get as many shapes from Brimstail using drop trick.
-Another way is to try to exchange big shape values for smaller shapes.
-The idea is get a coverage of values so when you try the locks, you can be sure to get a solution.
+You should try to get as many shapes from Brimstail using drop trick.  
+Another way is to try to exchange big shape values for smaller shapes.  
+The idea is get a coverage of values so when you try the locks, you can be sure to get a solution.  
 
 ## Why did I make this?
 Started playing OSRS again and came across this quest.    
@@ -24,9 +24,9 @@ Unlike the subset sum problem, we are restricted to a number of shapes allowed t
 That is to say, if one lock has a limit of two shapes, we are lookng for a pair in the array that equals that lock weight  
 
 ## Compatability
-Runs well with Linux environment
+Runs well with Linux environment  
 Works with Windows environment using cx_Freeze
 
 ## Screenshot
-![alt tag](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
-![alt tag](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt tag](https://raw.githubusercontent.com/Fompei/eyes-of-glouphrie-calculator/master/linux_gui.png)  
+![alt tag](https://raw.githubusercontent.com/Fompei/eyes-of-glouphrie-calculator/master/windows_gui.png)  
