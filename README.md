@@ -4,6 +4,11 @@
 Python GUI implementation to help players calculate the shapes they have in their inventory.    
 Images taken from http://2007.runescape.wikia.com/  
 
+## What should you do before running tool?
+You should try to get as many shapes from Brimstail using drop trick.
+Another way is to try to exchange big shape values for smaller shapes.
+The idea is get a coverage of values so when you try the locks, you can be sure to get a solution.
+
 ## Why did I make this?
 Started playing OSRS again and came across this quest.    
 I did this quest when I was younger, and when I was doing it again I had trouble trying to get the correct amount to   unlock the machine. So I decided I'd make a program to help me see if I have the solution in my inventory  
@@ -17,3 +22,11 @@ This is a variation of the subset sum problem.
 Our shapes that we hold in our inventory will be our array/list of numbers.  Our locks are the sum we are trying to find. 
 Unlike the subset sum problem, we are restricted to a number of shapes allowed to open the lock.  
 That is to say, if one lock has a limit of two shapes, we are lookng for a pair in the array that equals that lock weight  
+
+## Compatability
+Runs well with Linux environment
+Works with Windows environment using cx_Freeze
+
+## Screenshot
+![alt tag](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt tag](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
