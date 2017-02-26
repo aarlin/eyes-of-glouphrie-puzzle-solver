@@ -1,5 +1,7 @@
 # EYES OF GLOUPHRIE CALCULATOR
 
+# IGNORE FOLLOWING COMMENTS BELOW
+# ------------------------------------------------------
 # TURN .PY TO .EXE
 # validatecommand for SpinBox
 
@@ -37,6 +39,7 @@
 #no solution = more visible that there are no solutions??
 #py to exe
 #didnt do OOP
+#------------------------------------------------
 
 try:
     # Python 2.x

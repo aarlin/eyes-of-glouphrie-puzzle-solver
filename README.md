@@ -1,5 +1,3 @@
-### STILL WORK IN PROGRESS
-
 ## Runescape Eyes of Glouphrie Quest Calculator
 Python GUI implementation to help players calculate the shapes they have in their inventory.    
 Images taken from http://2007.runescape.wikia.com/  
