@@ -8,11 +8,11 @@ Another way is to try to exchange big shape values for smaller shapes.
 The idea is get a coverage of values so when you try the locks, you can be sure to get a solution.  
 
 ## How to run tool?  
-#Windows: 
+###Windows: 
 Access the files:  
 build > exe.win32-2.7 > eyescalc.exe   
 Run eyescalc.py
-#Unix:   
+###Unix:   
 Change directory to files  
 Run command 'python eyescalc.py'   
 There might be some dependencies that you'll have to install; possibly PIL and tkinter  
