@@ -21,7 +21,7 @@ Access the files:
 build > exe.win32-2.7 > eyescalc.exe   
 
 ### Unix:   
-Change directory to the location of eyescalc.py
+Change directory to the location of eyescalc.py    
 Run command `python eyescalc.py`      
 There might be some dependencies that you'll have to install; possibly PIL and tkinter  
 
