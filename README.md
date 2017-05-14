@@ -1,6 +1,6 @@
-## Runescape Eyes of Glouphrie Quest Calculator
-Python GUI implementation to help players calculate the shapes they have in their inventory.    
-Images taken from http://2007.runescape.wikia.com/  
+## Runescape Eyes of Glouphrie Puzzle Solver
+Python GUI implementation to help players solve the puzzle lock using the shapes they have in their inventory.      
+Images taken from http://2007.runescape.wikia.com/    
 
 I started playing Old School Runescape recently and came upon this quest 
 I did this quest when I was younger but had trouble trying to get the correct amount to unlock the machine. In order to aid me and potentially other people, I decided I'd make a program to help me see if I have the solution in my inventory  
