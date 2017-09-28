@@ -23,7 +23,10 @@ build > exe.win32-2.7 > eyescalc.exe
 ### Unix:   
 Change directory to the location of eyescalc.py    
 Run command `python eyescalc.py`      
-There might be some dependencies that you'll have to install; possibly PIL and tkinter  
+There might be some dependencies that you'll have to install
+`apt-get install python-tk`  
+`pip install Pillow`  
+
 
 ## Type of Problem
 The premise of this calculator involved adding shapes that held a numerical weight into a lock. The lock only opened itself with a certain weight.  
