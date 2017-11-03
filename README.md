@@ -22,7 +22,7 @@ Go to release page:
 Download build.zip  
 Unzip file and open folder  
 Two ways to open program  
-1. Access folder directory eog-solver > build > exe.win32-2.7 > eyescalc.exe   
+1. Access folder directory eog-solver > build > exe.win32-2.7 > Run eyescalc.exe as Admin  
 2. Access folder directory eog-solver > dist > Eyes of Glouphrie Calculator-1.0-win32.msi  
 After downloading msi file, go to folder where downloaded; usually C:\Programs Files (x86)\Eyes of Glouphrie Calculator and run eyescalc.exe  
 
@@ -35,7 +35,7 @@ There might be some dependencies that you'll have to install
 afterwards run `python eyescalc.py`. Python 2.7 is required  
 
 If you want to build the python files into Windows, run  
-`pip install cx_Freeze`  
+`pip install cx_Freeze`   
 `python setup.py build` or `python setup.py bdist_msi`  
 
 
@@ -48,5 +48,6 @@ Unlike the subset sum problem, we are restricted to a number of shapes allowed t
 That is to say, if one lock has a limit of two shapes, we are lookng for a pair in the array that equals that lock weight  
 
 ## Screenshots
-![alt tag](https://raw.githubusercontent.com/Fompei/eyes-of-glouphrie-calculator/master/linux_gui.png)  
-![alt tag](https://raw.githubusercontent.com/Fompei/eyes-of-glouphrie-calculator/master/windows_gui.png)  
+![alt tag](https://raw.githubusercontent.com/fompei/eyes-of-glouphrie-puzzle-solver/master/screenshots/linux_gui.png) 
+![alt tag](https://raw.githubusercontent.com/Fompei/eyes-of-glouphrie-calculator/master/screenshots/windows_gui.png)
+![alt tag](https://raw.githubusercontent.com/fompei/eyes-of-glouphrie-puzzle-solver/master/screenshots/sample_solution.png)  
