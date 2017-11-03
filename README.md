@@ -32,6 +32,8 @@ Run command `python eyescalc.py`
 There might be some dependencies that you'll have to install  
 `apt-get install python-tk`  
 `pip install Pillow`  
+afterwards run `python eyescalc.py`. Python 2.7 is required  
+
 If you want to build the python files into Windows, run  
 `pip install cx_Freeze`  
 `python setup.py build` or `python setup.py bdist_msi`  
