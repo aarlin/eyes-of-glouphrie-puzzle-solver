@@ -38,6 +38,12 @@ If you want to build the python files into Windows, run
 `pip install cx_Freeze`   
 `python setup.py build` or `python setup.py bdist_msi`  
 
+## HELP! I'm getting an empty windows for the 'Check inventory' button
+If your window looks like the following image:
+![alt tag](https://raw.githubusercontent.com/fompei/eyes-of-glouphrie-puzzle-solver/master/screenshots/no_solution.png) 
+It means that there was no solution for that specific lock based on your current inventory.
+Drop trick Brimstail for more shapes and try again
+
 
 ## Type of Problem
 The premise of this calculator involved adding shapes that held a numerical weight into a lock. The lock only opened itself with a certain weight.  
